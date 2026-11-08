@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naho Market | Tu supermercado en línea</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header class="encabezado">
+        <div class="logo">
+            <span>🛒</span>
+            <h1>Naho Market</h1>
+        </div>
+
+        <div class="buscador">
+            <input type="text" id="busqueda"
+                placeholder="¿Qué producto buscas?">
+            <button onclick="buscarProductos()">Buscar</button>
+        </div>
+
+        <button class="boton-carrito" onclick="verCarrito()">
+            🛍️ Carrito (<span id="contador">0</span>)
+        </button>
+    </header>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="menu">
+        <a href="#inicio">Inicio</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#productos">Productos</a>
+        <a href="#ofertas">Ofertas</a>
+    </nav>
+
+    <!-- BIENVENIDA -->
+    <main>
+        <section class="bienvenida" id="inicio">
+            <div>
+                <p class="etiqueta">¡Todo lo que necesitas!</p>
+                <h2>Bienvenido a Naho Market</h2>
+                <p>Tu tienda en línea para encontrar productos
+                    de calidad a precios accesibles.</p>
+                <a class="boton-principal" href="#productos">
+                    Comprar ahora
+                </a>
+            </div>
+            <div class="imagen-bienvenida">🛒 🥑 🍎</div>
+        </section>
+
+        <!-- CATEGORÍAS -->
+        <section id="categorias" class="seccion">
+            <h2>Nuestras categorías</h2>
+            <p>Encuentra fácilmente lo que necesitas.</p>
+
+            <div class="categorias">
+                <button onclick="filtrarCategoria('Alimentos')">
+                    🥦 Alimentos
+                </button>
+                <button onclick="filtrarCategoria('Bebidas')">
+                    🥤 Bebidas
+                </button>
+                <button onclick="filtrarCategoria('Limpieza')">
+                    🧼 Limpieza
+                </button>
+                <button onclick="filtrarCategoria('Higiene')">
+                    🧴 Higiene personal
+                </button>
+                <button onclick="filtrarCategoria('Todos')">
+                    🛍️ Ver todo
+                </button>
+            </div>
+        </section>
+
+        <section id="ofertas" class="franja-ofertas seccion">
+            <h2>🎉 Ofertas especiales</h2>
+            <p>¡Aprovecha nuestros precios especiales de la semana!</p>
+        
+            <div id="lista-ofertas" class="productos"></div>
+        </section>
+
+        <!-- PRODUCTOS -->
+        <section id="productos" class="seccion">
+            <h2> nuestros productos</h2>
+            <p>Selecciona tus productos favoritos.</p>
+
+            <div id="lista-productos" class="productos"></div>
+            <p id="mensaje" aria-live="polite"></p>
+        </section>
+    </main>
+<!-- CARRITO DE COMPRAS -->
+<section id="carrito" class="seccion seccion-carrito">
+    <h2>🛒 Mi carrito de compras</h2>
+    <p>Revisa tus productos antes de continuar.</p>
+
+    <div id="lista-carrito">
+        <p class="carrito-vacio">Tu carrito está vacío.</p>
+    </div>
+
+    <div class="resumen-carrito">
+        <p>Subtotal: <strong id="subtotal-carrito">$0.00 MXN</strong></p>
+        <p>Total: <strong id="total-carrito">$0.00 MXN</strong></p>
+    </div>
+
+    <button class="boton-vaciar" onclick="vaciarCarrito()">
+        Vaciar carrito
+    </button>
+</section>
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <h3>Naho Market 🛒</h3>
+        <p>Tu supermercado de confianza.</p>
+        <p>Proyecto académico de E-Business</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

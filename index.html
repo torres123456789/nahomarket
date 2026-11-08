@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Naho Market: supermercado en línea con grandes ofertas.">
+  <meta name="theme-color" content="#d71920">
+  <title>Naho Market | Tu supermercado en línea</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<a href="https://wa.me/528994957051?text=Hola,%20quiero%20información%20sobre%20un%20pedido%20de%20Naho%20Market"
+   class="boton-whatsapp"
+   target="_blank"
+   rel="noopener">
+  <span>☏</span> WhatsApp
+</a>
+<body>
+
+<div class="barra-superior">
+  <span>🚚 Compras fáciles y rápidas</span>
+  <span>¡Envío GRATIS en compras mayores a $500!</span>
+</div>
+
+<header class="encabezado">
+  <a class="logo" href="#inicio">
+    <span>🛒</span>
+    <h1>Naho<span>Market</span></h1>
+  </a>
+
+  <form class="buscador" id="formBusqueda">
+    <input id="busqueda" type="search" placeholder="¿Qué estás buscando?" aria-label="Buscar productos">
+    <button type="submit">🔍 Buscar</button>
+  </form>
+
+  <div class="acciones-header">
+    <button class="boton-secundario" onclick="abrirLogin()" id="botonUsuario">👤 Mi cuenta</button>
+    <button class="boton-carrito" onclick="verCarrito()">🛍️ Carrito <span id="contador">0</span></button>
+  </div>
+</header>
+
+<nav class="menu">
+  <a href="#inicio">Inicio</a>
+  <a href="#categorias">Categorías</a>
+  <a href="#productos">Productos</a>
+  <a href="#ofertas">Ofertas 🔥</a>
+  <a href="#favoritos">❤️ Favoritos <span id="contadorFavoritos">0</span></a>
+  <a href="#carrito">Mi carrito</a>
+</nav>
+
+<main>
+
+  <section class="bienvenida" id="inicio">
+    <div class="bienvenida-contenido">
+      <span class="etiqueta">BIENVENIDO A NAHO MARKET</span>
+      <h2>Todo lo que necesitas, en un solo lugar.</h2>
+      <p>Haz tus compras de manera fácil, rápida y segura. Encuentra los mejores productos para tu hogar.</p>
+      <a href="#productos" class="boton-principal">COMPRAR AHORA →</a>
+      <div class="beneficios-hero">
+        <span>✓ Grandes ofertas</span>
+        <span>✓ Gran variedad</span>
+        <span>✓ Compra sencilla</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <span>🛒</span>
+      <div>🥑 🍎 🥛</div>
+    </div>
+  </section>
+
+  <section class="beneficios">
+    <div><span>🚚</span><div><strong>Envío gratis</strong><small>En compras de $500 o más</small></div></div>
+    <div><span>💳</span><div><strong>Fácil de pagar</strong><small>Distintos métodos de pago</small></div></div>
+    <div><span>🛒</span><div><strong>Compra sencilla</strong><small>Todo en un solo lugar</small></div></div>
+    <div><span>⭐</span><div><strong>Grandes ofertas</strong><small>Ahorra en tus compras</small></div></div>
+  </section>
+
+  <section id="categorias" class="seccion">
+    <div class="titulo-seccion">
+      <div>
+        <span class="subtitulo">EXPLORA NUESTRA TIENDA</span>
+        <h2>Compra por categoría</h2>
+        <p>Encuentra rápidamente lo que necesitas.</p>
+      </div>
+    </div>
+    <div class="categorias">
+      <button class="activo" onclick="filtrarCategoria('Todos',this)">🛍️ Todo</button>
+      <button onclick="filtrarCategoria('Alimentos',this)">🥦 Alimentos</button>
+      <button onclick="filtrarCategoria('Bebidas',this)">🥤 Bebidas</button>
+      <button onclick="filtrarCategoria('Limpieza',this)">🧼 Limpieza</button>
+      <button onclick="filtrarCategoria('Higiene',this)">🧴 Higiene personal</button>
+    </div>
+  </section>
+
+  <section id="ofertas" class="seccion">
+    <div class="titulo-seccion">
+      <div>
+        <span class="subtitulo">APROVECHA Y AHORRA</span>
+        <h2>🔥 Ofertas especiales</h2>
+        <p>Descuentos especiales en productos seleccionados.</p>
+      </div>
+      <span class="sello-oferta">HASTA 10% DE DESCUENTO</span>
+    </div>
+    <div id="lista-ofertas" class="productos"></div>
+  </section>
+
+  <section id="productos" class="seccion">
+    <div class="titulo-seccion">
+      <div>
+        <span class="subtitulo">NUESTRO CATÁLOGO</span>
+        <h2>Todos nuestros productos</h2>
+        <p id="textoResultados">Explora nuestros productos.</p>
+      </div>
+      <div class="ordenar">
+        <label for="ordenProductos">Ordenar:</label>
+        <select id="ordenProductos">
+          <option value="relevancia">Recomendados</option>
+          <option value="menor">Precio: menor a mayor</option>
+          <option value="mayor">Precio: mayor a menor</option>
+          <option value="nombre">Nombre A-Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="barra-filtros">
+      <label>Precio máximo:
+        <input id="precioMaximo" type="range" min="20" max="150" value="150">
+        <strong id="valorPrecio">$150</strong>
+      </label>
+      <button class="boton-secundario" onclick="limpiarFiltros()">Limpiar filtros ↺</button>
+    </div>
+
+    <div id="lista-productos" class="productos"></div>
+    <p id="mensaje" aria-live="polite"></p>
+  </section>
+
+  <section id="favoritos" class="seccion">
+    <div class="titulo-seccion">
+      <div>
+        <span class="subtitulo">TUS PRODUCTOS PREFERIDOS</span>
+        <h2>❤️ Mis favoritos</h2>
+        <p>Guarda los productos que más te gustan.</p>
+      </div>
+    </div>
+    <div id="lista-favoritos" class="productos">
+      <p>Aún no tienes favoritos.</p>
+    </div>
+  </section>
+
+  <section id="carrito" class="seccion seccion-carrito">
+    <span class="subtitulo">RESUMEN DE TU COMPRA</span>
+    <h2>🛒 Mi carrito</h2>
+    <p>Revisa tus productos antes de finalizar tu pedido.</p>
+
+    <div id="lista-carrito">
+      <p class="carrito-vacio">Tu carrito está vacío.</p>
+    </div>
+
+    <div class="resumen-carrito">
+      <p>Subtotal: <strong id="subtotal-carrito">$0.00 MXN</strong></p>
+      <p>Envío: <strong id="envio-carrito">GRATIS</strong></p>
+      <p class="total">Total: <strong id="total-carrito">$0.00 MXN</strong></p>
+      <small>Envío gratis en compras de $500 MXN o más. En pedidos menores: $49 MXN.</small>
+    </div>
+
+    <div class="botones-carrito">
+      <button class="boton-secundario" onclick="vaciarCarrito()">Vaciar carrito</button>
+      <button class="boton-principal" onclick="abrirPago()">Continuar al pago →</button>
+    </div>
+  </section>
+
+  <section class="seccion panel-admin" id="administracion">
+    <span class="subtitulo">CONTROL DE LA TIENDA</span>
+    <h2>⚙️ Administración</h2>
+    <p>Panel de consulta de los pedidos de demostración.</p>
+    <div class="admin-resumen" id="resumenAdmin"></div>
+    <div id="lista-pedidos"><p>Aún no hay pedidos registrados.</p></div>
+    <p class="nota">Panel académico local. Los datos se almacenan en este navegador.</p>
+  </section>
+
+</main>
+
+<!-- LOGIN -->
+<div class="modal" id="modalLogin" role="dialog" aria-modal="true">
+  <div class="modal-contenido">
+    <button class="cerrar" onclick="cerrarModal('modalLogin')">✕</button>
+    <div class="icono-modal">👤</div>
+    <h2>Bienvenido a Naho Market</h2>
+    <p>Inicia sesión o crea tu cuenta de demostración.</p>
+
+    <form id="formLogin">
+      <label for="nombreUsuario">Nombre</label>
+      <input id="nombreUsuario" required placeholder="Tu nombre">
+      <label for="correoUsuario">Correo electrónico</label>
+      <input id="correoUsuario" type="email" required placeholder="correo@ejemplo.com">
+      <label for="contrasenaUsuario">Contraseña</label>
+      <input id="contrasenaUsuario" type="password" minlength="4" required placeholder="Mínimo 4 caracteres">
+      <button class="boton-principal ancho" type="submit">Entrar / Crear cuenta</button>
+    </form>
+
+    <button class="boton-secundario ancho" onclick="cerrarSesion()">Cerrar sesión</button>
+    <p class="nota">Cuenta de demostración. No uses contraseñas reales.</p>
+    <p id="mensajeLogin" aria-live="polite"></p>
+  </div>
+</div>
+
+<!-- PAGO -->
+<div class="modal" id="modalPago" role="dialog" aria-modal="true">
+  <div class="modal-contenido">
+    <button class="cerrar" onclick="cerrarModal('modalPago')">✕</button>
+    <div class="icono-modal">💳</div>
+    <h2>Finalizar compra</h2>
+    <p>Completa tus datos para registrar el pedido.</p>
+
+    <form id="formPago">
+      <label for="nombreEntrega">Nombre de quien recibe</label>
+      <input id="nombreEntrega" required placeholder="Nombre completo">
+
+      <label for="correoEntrega">Correo electrónico</label>
+      <input id="correoEntrega" type="email" required placeholder="correo@ejemplo.com">
+
+      <label for="direccionEntrega">Dirección de entrega</label>
+      <input id="direccionEntrega" required placeholder="Calle, número y colonia">
+
+      <label for="metodoPago">Método de pago</label>
+      <select id="metodoPago" required>
+        <option value="">Selecciona una opción</option>
+        <option>Efectivo contra entrega</option>
+        <option>Transferencia bancaria (demo)</option>
+        <option>Tarjeta de crédito/débito (demo)</option>
+      </select>
+
+      <div class="resumen-pago">
+        <span>Total de tu pedido</span>
+        <strong id="total-pago">$0.00 MXN</strong>
+      </div>
+
+      <button class="boton-principal ancho" type="submit">Confirmar pedido</button>
+    </form>
+    <p class="nota">Pago simulado. No se realizan cobros reales ni se almacenan datos bancarios.</p>
+    <p id="mensajePago" aria-live="polite"></p>
+  </div>
+</div>
+
+<!-- CHAT -->
+<button class="boton-chat" onclick="alternarChat()">💬 ¿Necesitas ayuda?</button>
+
+<div class="chat" id="ventanaChat">
+  <div class="chat-cabecera">
+    <div><strong>💬 Naho te ayuda</strong><br><small>Asistente de la tienda</small></div>
+    <button onclick="alternarChat()">✕</button>
+  </div>
+  <div id="mensajesChat" class="mensajes-chat">
+    <div class="mensaje-bot">¡Hola! 👋 Bienvenido a Naho Market. ¿En qué puedo ayudarte?</div>
+  </div>
+  <form id="formChat" class="form-chat">
+    <input id="entradaChat" placeholder="Escribe tu duda..." required autocomplete="off">
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-contenido">
+    <h2>🛒 Naho Market</h2>
+    <p>Tu supermercado de confianza.</p>
+    <div class="footer-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#carrito">Mi carrito</a>
+      <a href="#administracion">Administración</a>
+    </div>
+    <div class="footer-final">
+      <p>Proyecto académico de E-Business · © 2026 Naho Market</p>
+      <p>Calidad, variedad y buenos precios.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
